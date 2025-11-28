@@ -4,11 +4,14 @@ void GetSet(int **arr, int *n) {
     static int temp[100];
     int i;
 
-    printf("Enter number of elements: ");
+    if (arr == NULL || n == NULL) return;
+
     scanf("%d", n);
 
+    if (*n < 0) *n = 0;
+    if (*n > 100) *n = 100;
+
     for (i = 0; i < *n; i++) {
-        printf("Element %d: ", i + 1);
         scanf("%d", &temp[i]);
     }
 
