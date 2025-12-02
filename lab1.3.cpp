@@ -1,28 +1,40 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int *GetSet(int *n) {
-    static int temp[100];
-    int i;
+    int *arr;
 
-    printf("Enter number of elements: ");
+    //ask user for input
     scanf("%d", n);
 
-    for (int i = 0; i < *n; i++){
-        printf("Element %d: ", i + 1);
-        scanf("%d", &temp[i]);
+    //the size of array depends on user input
+    arr = (int *)malloc(sizeof(int) * (*n));
+    if (arr == NULL) {
+        printf("Allocation FAILED.\n");
+        exit(0);
     }
 
-    return temp;
+    //read user input for each one.
+    for(int i = 0; i < *n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    return arr;
 }
 
 int main() {
     int *data, num;
     data = GetSet(&num);
 
-    printf("\nSet elements: ");
+    //print data
     for (int i = 0; i < num; i++) {
         printf("%d ", data[i]);
     }
+    printf("\n");
+
+    //free allocated memory
+    free(data);
+    data = NULL;
 
     return 0;
 }
