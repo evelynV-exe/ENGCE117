@@ -1,32 +1,36 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void GetSet(int **arr, int *n) {
-    static int temp[100];
-    int i;
-
-    if (arr == NULL || n == NULL) return;
-
+    
     scanf("%d", n);
 
-    if (*n < 0) *n = 0;
-    if (*n > 100) *n = 100;
+    //size based on *n
+    *arr = (int *)malloc(sizeof(int) * (*n));    
 
-    for (i = 0; i < *n; i++) {
-        scanf("%d", &temp[i]);
+    //checking if failed or pass
+    if (*arr == NULL) {
+        printf("Allocation FAILED.");
+        exit(0);
     }
 
-    *arr = temp;
+    for (int i = 0; i < *n; i++) {
+        scanf("%d", &(*arr)[i]);
+    }
 }
 
 int main() {
     int *data, num;
     GetSet(&data, &num);
 
-    //print out the numbers
     for (int i = 0; i < num; i++) {
         printf("%d ", data[i]);
     }
     printf("\n");
+
+    //free data
+    free(data);
+    data = NULL;
 
     return 0;
 }
