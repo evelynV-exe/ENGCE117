@@ -1,39 +1,47 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int *GetMatrix (int *row, int *col) {
-    int *arr;
-    //get user input
-    scanf("%d %d", row, col);
+// Allocate and input a matrix from the user
+int *GetMatrix(int *numRows, int *numCols) {
+    int *matrix;
 
-    arr = (int *)malloc((*row) * (*col) * sizeof(int));
-    if (arr == NULL) {
+    scanf("%d %d", numRows, numCols);
+
+    // Allocate memory for matrix
+    matrix = (int *)malloc((*numRows) * (*numCols) * sizeof(int));
+    if (matrix == NULL) {
         printf("Allocation FAILED.\n");
         exit(0);
     }
 
-    for(int r = 0; r < *row; r++) {
-        for (int c = 0; c < *col; c++) {
-            scanf("%d", &arr[r * (*col) + c]);
+    // Input matrix values
+    for (int rowIndex = 0; rowIndex < *numRows; rowIndex++) {
+        for (int colIndex = 0; colIndex < *numCols; colIndex++) {
+            scanf("%d", &matrix[rowIndex * (*numCols) + colIndex]);
         }
     }
 
-    return arr;
+    return matrix;
 }
 
 int main() {
-    int *data, row, col;
-    data = GetMatrix(&row, &col);
+    int *matrixData;
+    int numRows, numCols;
 
-    for (int r = 0; r < row; r++) {
-        for (int c = 0; c < col; c++) {
-            printf("%d ", data[r * col + c]);
+    // Input + allocate matrix
+    matrixData = GetMatrix(&numRows, &numCols);
+
+    // Display matrix
+    for (int rowIndex = 0; rowIndex < numRows; rowIndex++) {
+        for (int colIndex = 0; colIndex < numCols; colIndex++) {
+            printf("%d ", matrixData[rowIndex * numCols + colIndex]);
         }
         printf("\n");
     }
 
-    free(data);
-    data = NULL;
+    // Free allocated memory
+    free(matrixData);
+    matrixData = NULL;
 
     return 0;
 }
