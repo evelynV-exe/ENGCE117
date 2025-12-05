@@ -1,36 +1,32 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-void GetSet(int **arr, int *n) {
+void GetSet(int *&arr, int &n) {
     
-    scanf("%d", n);
+    //get the array size from user
+    scanf("%d", &n);
 
-    //size based on *n
-    *arr = (int *)malloc(sizeof(int) * (*n));    
+    //the array size based on *n
+    arr = new int[n];    
 
-    //checking if failed or pass
-    if (*arr == NULL) {
-        printf("Allocation FAILED.");
-        exit(0);
-    }
-
-    for (int i = 0; i < *n; i++) {
-        scanf("%d", &(*arr)[i]);
+    //accept user input
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &(arr)[i]);
     }
 }
 
 int main() {
     int *data, num;
-    GetSet(&data, &num);
+    GetSet(data, num);
 
+    //print data
     for (int i = 0; i < num; i++) {
         printf("%d ", data[i]);
     }
     printf("\n");
 
     //free data
-    free(data);
-    data = NULL;
+    delete[] data;
+    data = nullptr;
 
     return 0;
 }
