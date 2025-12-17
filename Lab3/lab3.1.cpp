@@ -7,23 +7,23 @@ struct student {
     float gpa;
 };
 
-void upgrade(struct student *person);
+void upgrade(struct student person);
 
 int main() {
     struct student aboy;
     aboy.sex = 'F';
     aboy.gpa = 2.00;
-    upgrade(&aboy);
+    upgrade(aboy);
     printf("%.2f", aboy.gpa);
 
     return 0;
 }
 
-void upgrade(struct student *person) {
+void upgrade(struct student person) {
 
-    if (person->sex == 'M') {
-        person->gpa *= 1.1;   
-    } else if (person->sex == 'F') {
-        person->gpa *= 1.2;
+    if (person.sex == 'M') {
+        person.gpa *= 1.1;   
+    } else if (person.sex == 'F') {
+        person.gpa *= 1.2;
     }
 }
